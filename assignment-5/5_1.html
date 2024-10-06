@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Car</title>
+
+        <style>
+            .mydiv {
+                width:700px; 
+                height:500px; 
+                position:relative;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="mydiv">
+            <img src="images.jpg" 
+            id="car" style="position:absolute; 
+            top:0px; left:0px;" />
+        </div>
+
+        X-Axis : <input id="xaxis" /><br/><br/>
+        Y-Axis : <input id="yaxis" /><br/><br/>
+
+        <input type="button" value="Start" id="start" onclick="Start()" />
+        <input type="button" value="Stop" id="stop" onclick="Stop()" />
+
+        <script>
+            var countX = 0;
+            var countY = 0;
+            var intervalId;
+
+            function Start() {
+                intervalId = window.setInterval(ExecuteMe, 100);
+            }
+
+            function ExecuteMe() {
+                var reftoimg = document.getElementById("car");
+                var reftoxaxis = document.getElementById("xaxis");
+                var reftoyaxis = document.getElementById("yaxis");
+
+                // Move car right until x = 400
+                if (countX <= 400) {
+                    countX += 10; // Adjust this value for speed
+                    reftoimg.style.left = countX + "px";
+                    reftoxaxis.value = countX;
+                }
+                // After reaching x = 400, move the car down along the y-axis
+                else {
+                    countY += 10; // Adjust this value for speed
+                    reftoimg.style.top = countY + "px";
+                    reftoyaxis.value = countY;
+                }
+            }
+
+            function Stop() {
+                window.clearInterval(intervalId);
+            }
+        </script>
+    </body>
+</html>
